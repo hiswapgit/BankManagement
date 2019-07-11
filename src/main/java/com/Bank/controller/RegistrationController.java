@@ -13,6 +13,7 @@ import com.Bank.service.RegistrationService;
 
 
 
+
 @RestController
 @RequestMapping("/register")
 public class RegistrationController {
@@ -22,13 +23,19 @@ public class RegistrationController {
 
 	
 	
+	/**
+	 * This method is used to create new user
+	 * @RequestBody used to get object from ui
+	 * return sucess if user created
+	 *
+	 */
 	@PostMapping("/add")
 	public ResponseEntity<String> addUser(@RequestBody User user){
 		
 		if(null!= user.getPassword() &&null !=user.getDob()&& null!= user.getUserName()&&null !=user.getMail()&& null!=user.getPhoneNo()&&null!=user.getGender())
 		{
 		
-			registrationService.addUser(user);
+			registrationService.addUser(user);;
 			
 			return new ResponseEntity<>("Sucessfully Register",HttpStatus.OK);
 		

@@ -18,7 +18,11 @@ public class RegistrationService {
 	@Autowired 
 	AccountRepository accountrepository;
 	
-	
+	/**
+	 * This method is used create user by using save method of jpa repository
+	 * also add account object with randam account_no 
+	 *
+	 */
 	public void addUser(User user){
 		
 	

@@ -12,12 +12,26 @@ public class LoginService {
 	@Autowired
 	UserRepository userRepository;
 	
-public User getOne(Long id){
+	/**
+	 * This method is used to check valid user
+	 * take usename and password from cotroller and verify
+	 * return sucess if user created
+	 *
+	 */
 	
-	
-		return userRepository.getOne(id);
+	public boolean check(String username,String password)
+	{
 		
+		User userdb=userRepository.findUserNameAndPassword(username, password);
+		if(userdb.getUserName().equals(username)&&userdb.getPassword().equals(password))
+		{
+			return true;
 		}
+		else 
+			return false;
+	}
+	
+
 
 	
 }

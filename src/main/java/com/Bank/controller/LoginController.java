@@ -4,11 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Bank.entity.User;
 import com.Bank.service.AccountService;
 import com.Bank.service.LoginService;
 import com.Bank.service.TranscationService;
@@ -23,33 +22,24 @@ public class LoginController {
 	@Autowired 
 	AccountService accountservice;
 	
+
+	/**
+	 * This method is used to check valid user
+	 * @Requestparam used to get username and password from user
+	 * return sucess if user matches username and password
+	 *
+	 */
 	@Autowired
 	TranscationService transcationservice;
 	@PostMapping("/validate")
-	public ResponseEntity<String> validateUser(@RequestBody User user)
+	public ResponseEntity<String> validateUser(@RequestParam String username,@RequestParam String password)
 	{
 	
 	
-		 String username=user.getUserName(); 
-		 String password=user.getPassword();
-		 
-		
-		Long id=user.getId();
-		
-		User user1=loginservice.getOne(id);
-		
-		if(username.equals(user1.getUserName())&&password.equals(user1.getPassword()))
+		if(loginservice.check(username, password))
 		{
-			
-			
-			
-			
 			return new ResponseEntity<>("Sucessfully Register",HttpStatus.OK);
-			
-			
 		}
-		
-		
 		else
 		{
 			return new ResponseEntity<>("Fail try again",HttpStatus.NOT_FOUND);
